@@ -73,10 +73,11 @@ export default function Barang() {
     e.preventDefault();
     setSubmitting(true);
 
+    // Pastikan category_id dan donor_id berformat integer / valid
     const payload = {
       name: formData.name,
-      category_id: formData.category_id || 1,
-      donor_id: formData.donor_id || null,
+      category_id: formData.category_id ? parseInt(formData.category_id) : (categories[0]?.id || 1),
+      donor_id: formData.donor_id ? parseInt(formData.donor_id) : (donors[0]?.id || null),
       condition: formData.condition || "Sangat Baik",
       location: formData.location || "Gudang Utama",
       status: "Tersedia",
@@ -84,7 +85,7 @@ export default function Barang() {
 
     try {
       const response = await apiClient.post("/items", payload);
-      if (response.data?.success || response.status === 201) {
+      if (response.data?.success || response.status === 201 || response.status === 200) {
         alert("Barang donasi berhasil ditambahkan!");
         setShowModal(false);
         setFormData({
@@ -98,8 +99,8 @@ export default function Barang() {
         fetchData();
       }
     } catch (err) {
-      console.error("Gagal menyimpan barang:", err);
-      alert("Gagal menyimpan barang.");
+      console.error("Gagal menyimpan barang:", err.response?.data || err);
+      alert(err.response?.data?.message || "Gagal menyimpan barang.");
     } finally {
       setSubmitting(false);
     }
