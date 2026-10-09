@@ -24,7 +24,7 @@
 
 ## 📖 Deskripsi Aplikasi
 
-**DonasiKita** adalah aplikasi pengelolaan donasi barang berbasis web yang dirancang untuk mempermudah pencatatan, pengelompokan, dan penyaluran barang donasi secara transparan dan efisien[cite: 1]. Aplikasi ini menyelesaikan kendala pendataan manual barang donasi dari donatur hingga tersampaikan kepada penerima manfaat dengan dukungan sistem status barang terintegrasi secara *real-time*[cite: 1, 2].
+**DonasiKita** adalah aplikasi pengelolaan donasi barang berbasis web yang dirancang untuk mempermudah pencatatan, pengelompokan, dan penyaluran barang donasi secara transparan dan efisien[cite: 1]. Aplikasi ini menyelesaikan kendala pendataan manual barang donasi dari donatur hingga tersampaikan kepada penerima manfaat dengan dukungan sistem status barang terintegrasi secara *real-time*.
 
 ---
 ---
@@ -54,25 +54,25 @@ Seluruh endpoint backend mengikuti arsitektur **RESTful API** dan mengembalikan 
 
 ### 1. Teknologi (Tech Stack)
 
-* **Backend:** Laravel 13 API (PHP 8.2+)[cite: 1]
-* **Frontend:** React SPA (Vite, JavaScript, Tailwind CSS / React Router, Axios)[cite: 1]
-* **Database:** MySQL[cite: 1]
-* **Deployment & Server:** aaPanel Cloud Hosting, Nginx Web Server[cite: 1]
+* **Backend:** Laravel 13 API (PHP 8.2+)
+* **Frontend:** React SPA (Vite, JavaScript, Tailwind CSS / React Router, Axios)
+* **Database:** MySQL
+* **Deployment & Server:** aaPanel Cloud Hosting, Nginx Web Server
 
 ### 2. Fitur Utama & Modul
 
 * **Autentikasi:** Login Admin & Manajemen Akses Token API (Kredensial Admin: `donasibareng@gmail.com` / `donasibarang123`).
-* **Modul Kategori & Donatur:** Manajemen data kategori barang dan pendataan profil donatur pemberi donasi[cite: 1].
-* **Modul Kelola Barang:** Pencatatan detail barang donasi, upload media, dan pelabelan status ketersediaan barang (`Tersedia` / `Tersalurkan`)[cite: 1, 2].
-* **Modul Penyaluran Donasi:** Alokasi penyaluran barang dari stok yang tersedia kepada penerima manfaat secara otomatis[cite: 1, 2].
+* **Modul Kategori & Donatur:** Manajemen data kategori barang dan pendataan profil donatur pemberi donasi.
+* **Modul Kelola Barang:** Pencatatan detail barang donasi, upload media, dan pelabelan status ketersediaan barang (`Tersedia` / `Tersalurkan`).
+* **Modul Penyaluran Donasi:** Alokasi penyaluran barang dari stok yang tersedia kepada penerima manfaat secara otomatis.
 * **Dashboard Analytics:** Visualisasi total data statistik barang, donatur, penerima manfaat, dan status transaksi penyaluran.
 
 ### 3. Skema Data Singkat
 
-* `categories` (1 : N) `items`[cite: 1]
-* `donors` (1 : N) `items`[cite: 1]
-* `recipients` (1 : N) `distributions` / `penyaluran`[cite: 1]
-* `items` (1 : 1) `distributions` (Penanganan transaksi status penyaluran barang)[cite: 1]
+* `categories` (1 : N) `items`
+* `donors` (1 : N) `items`
+* `recipients` (1 : N) `distributions` / `penyaluran`
+* `items` (1 : 1) `distributions` (Penanganan transaksi status penyaluran barang)
 
 ---
 
