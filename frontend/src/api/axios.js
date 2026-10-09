@@ -1,12 +1,11 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  },
-});
+    baseURL: 'https://d2.athafa.cloud/api', // Mengarah ke API di server
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
