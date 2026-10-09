@@ -16,7 +16,7 @@
 | No | Nama Lengkap | NIM | Shift Awal | Shift Akhir | Jobdesk / Kontribusi | Link Video Penjelasan |
 |---|---|---|---|---|---|---|
 | 1 | Ahmadin | H1H0240 | Shift A | Shift D | **Database Architect & Business Logic**: Perancangan Schema Database, Migrations, Foreign Key Constraints, Eloquent Model Relations, & Logic Status Penyaluran. | [YouTube/Drive](https://...) |
-| 2 | [Lula Khaisha Delavia] | [H1H024064] | [Shift D] | [Shift D] | **Backend Integrator & DevOps Engineer**: Penyesuaian Laravel RESTful API Payload, Build Pipeline Integration, Nginx URL Rewrite, & Live Deployment aaPanel. | [YouTube]([https://...](https://youtu.be/N_Wcv_fo7hk?si=BX2RXBY435BN4oQn) |
+| 2 | [Lula Khaisha Delavia] | H1H024064 | Shift D | Shift D | **Backend Integrator & DevOps Engineer**: Penyesuaian Laravel RESTful API Payload, Build Pipeline Integration, Nginx URL Rewrite, & Live Deployment aaPanel. | [YouTube]([https://...](https://youtu.be/N_Wcv_fo7hk?si=BX2RXBY435BN4oQn) |
 | 3 | [Aurel] | [H1H0240] | [Shift Awal] | [Shift Akhir] | **Frontend Developer**: React SPA Architecture, React Router Routing, State Management (Hooks), Form/Table UI Components, & Axios Handling. | [YouTube/Drive](https://...) |
 
 
