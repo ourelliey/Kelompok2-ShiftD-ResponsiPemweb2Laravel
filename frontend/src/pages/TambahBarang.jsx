@@ -1,0 +1,282 @@
+import { useState } from "react";
+import { ArrowLeft, Save } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+function TambahBarang() {
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    nama: "",
+    kategori: "",
+    donatur: "",
+    jumlah: "",
+    deskripsi: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const [successMessage, setSuccessMessage] =
+    useState("");
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setForm((currentForm) => ({
+      ...currentForm,
+      [name]: value,
+    }));
+
+    setErrors((currentErrors) => ({
+      ...currentErrors,
+      [name]: "",
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!form.nama.trim()) {
+      newErrors.nama = "Nama barang wajib diisi.";
+    }
+
+    if (!form.kategori) {
+      newErrors.kategori = "Kategori wajib dipilih.";
+    }
+
+    if (!form.donatur.trim()) {
+      newErrors.donatur = "Nama donatur wajib diisi.";
+    }
+
+    if (!form.jumlah) {
+      newErrors.jumlah = "Jumlah wajib diisi.";
+    } else if (Number(form.jumlah) <= 0) {
+      newErrors.jumlah =
+        "Jumlah harus lebih besar dari 0.";
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const validationErrors = validateForm();
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    const existingBarang =
+      JSON.parse(
+        localStorage.getItem("barangList")
+      ) || [];
+
+    const newBarang = {
+      id: Date.now(),
+      nama: form.nama.trim(),
+      kategori: form.kategori,
+      donatur: form.donatur.trim(),
+      jumlah: Number(form.jumlah),
+      status: "Tersedia",
+      deskripsi: form.deskripsi.trim(),
+    };
+
+    localStorage.setItem(
+      "barangList",
+      JSON.stringify([
+        ...existingBarang,
+        newBarang,
+      ])
+    );
+
+    setSuccessMessage(
+      "Barang berhasil ditambahkan."
+    );
+
+    setTimeout(() => {
+      navigate("/barang");
+    }, 1000);
+  };
+
+  return (
+    <div className="form-page">
+      <div className="page-heading">
+        <div>
+          <h2>Tambah Barang</h2>
+          <p>
+            Tambahkan barang donasi baru ke dalam sistem.
+          </p>
+        </div>
+
+        <button
+          className="secondary-button"
+          onClick={() => navigate("/barang")}
+        >
+          <ArrowLeft size={18} />
+          Kembali
+        </button>
+      </div>
+
+      {successMessage && (
+        <div className="success-message">
+          {successMessage}
+        </div>
+      )}
+
+      <div className="form-card">
+        <form onSubmit={handleSubmit}>
+          <div className="form-section">
+            <h3>Informasi Barang</h3>
+            <p>
+              Masukkan informasi barang yang akan
+              didonasikan.
+            </p>
+          </div>
+
+          <div className="form-grid">
+            <div className="form-group">
+              <label htmlFor="nama">
+                Nama Barang <span>*</span>
+              </label>
+
+              <input
+                id="nama"
+                name="nama"
+                type="text"
+                value={form.nama}
+                onChange={handleChange}
+                placeholder="Contoh: Baju Layak Pakai"
+              />
+
+              {errors.nama && (
+                <small className="error-message">
+                  {errors.nama}
+                </small>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="kategori">
+                Kategori <span>*</span>
+              </label>
+
+              <select
+                id="kategori"
+                name="kategori"
+                value={form.kategori}
+                onChange={handleChange}
+              >
+                <option value="">
+                  Pilih kategori
+                </option>
+                <option value="Pakaian">
+                  Pakaian
+                </option>
+                <option value="Buku">
+                  Buku
+                </option>
+                <option value="Sepatu">
+                  Sepatu
+                </option>
+                <option value="Tas">
+                  Tas
+                </option>
+                <option value="Elektronik">
+                  Elektronik
+                </option>
+                <option value="Lainnya">
+                  Lainnya
+                </option>
+              </select>
+
+              {errors.kategori && (
+                <small className="error-message">
+                  {errors.kategori}
+                </small>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="donatur">
+                Donatur <span>*</span>
+              </label>
+
+              <input
+                id="donatur"
+                name="donatur"
+                type="text"
+                value={form.donatur}
+                onChange={handleChange}
+                placeholder="Nama donatur"
+              />
+
+              {errors.donatur && (
+                <small className="error-message">
+                  {errors.donatur}
+                </small>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="jumlah">
+                Jumlah <span>*</span>
+              </label>
+
+              <input
+                id="jumlah"
+                name="jumlah"
+                type="number"
+                min="1"
+                value={form.jumlah}
+                onChange={handleChange}
+                placeholder="Contoh: 10"
+              />
+
+              {errors.jumlah && (
+                <small className="error-message">
+                  {errors.jumlah}
+                </small>
+              )}
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="deskripsi">
+              Deskripsi
+            </label>
+
+            <textarea
+              id="deskripsi"
+              name="deskripsi"
+              rows="5"
+              value={form.deskripsi}
+              onChange={handleChange}
+              placeholder="Tuliskan kondisi atau keterangan barang..."
+            />
+          </div>
+
+          <div className="form-actions">
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={() => navigate("/barang")}
+            >
+              Batal
+            </button>
+
+            <button
+              type="submit"
+              className="primary-button"
+            >
+              <Save size={18} />
+              Simpan Barang
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export default TambahBarang;
